@@ -1,32 +1,28 @@
-<div class="jumbotron mt-3 py-0">
+<div class="jumbotron mt-3 py-0  col-sm-10 ml-5">
   <h1 class="display-4 font-weight-bold text-center">Barrios</h1>
 </div>
 <!-- filtro buscar -->
-<div class="row my-3 ">
-  <div class="ml-3">
-    <div class="mt-2 font-weight-bold">Buscar:</div>
-  </div>
-  <div class="col-sm-3">
-    <input id="buscar" class="form-control" type="text" name="buscar" placeholder="Buscar" value="">
-  </div>
   <!-- Button trigger modal -->
-  <div class="col-sm-8">
-    <button type="button" class="btn btn-success float-right font-weight-bold"
+  <div class="bg-dark ml-5">
+    <button type="button" class="btn btn-success float-left font-weight-bold"
       id="accionarModal"
       data-toggle="modal"
       data-target="#modal"
-      accion="Registrar Barrio"
-      campos="com_id,com_nombre,id_comuna"
-      url-data="<?=getUrl("Barrio","Barrio","postCreate")?>">
+      accion="registrar"
+      data-url="<?=getUrl("Barrio","Barrio","getCreate",false,"ajax")?>"
+      data-url-post="<?=getUrl("Barrio","Barrio","postCreate",false,"ajax")?>">
       Registrar
     </button>
   </div>
 <!-- fin modal -->
-</div>
+<br>
+<br><br>
 <!-- fin filtro buscar -->
 
 <!-- tabla comuna -->
-<table class="table table-striped table-hover">
+<div class="col-sm-11 ml-2">
+
+<table id="myTable" class="table table-striped table-hover ">
   <thead class="thead-dark">
     <tr>
       <th class="text-center">ID</th>
@@ -35,53 +31,45 @@
       <th class="text-center">Acciones</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody id="myTBody">
     <?php while ($barrio=pg_fetch_assoc($barrios)): ?>
-      <tr>
+      <tr >
         <td class="text-center"><?=$barrio['bar_id']?></td>
         <td class="text-center"><?=$barrio['bar_nombre']?></td>
         <td class="text-center"><?=$barrio['com_nombre']?></td>
         <td class="text-center">
-          <a href="<?=getUrl("Barrio","Barrio","getUpdate",$barrio) ?>" class="btn btn-success btn-round btn-sm" name="button">Editar</a>
-          <a href="<?=getUrl("Barrio","Barrio","getDelete",$barrio) ?>" class="btn btn-danger btn-round btn-sm" name="button">Erradicar</a>
+          <a id="accionarModal" data-toggle="modal" data-target="#modal" class="btn btn-success btn-round btn-sm text-white"
+          accion="actualizar"
+          data-id="<?=$barrio['bar_id']?>"
+          data-nombre="<?=$barrio['bar_nombre']?>"
+          data-id-comuna="<?=$barrio['com_id']?>"
+          data-url="<?=getUrl("Barrio","Barrio","getCreate",false,"ajax")?>"
+          data-url-post="<?=getUrl("Barrio","Barrio","postUpdate",false,"ajax")?>">
+            Editar
+          </a>
+          <a id="accionarModal" data-toggle="modal" data-target="#modal" class="btn btn-danger btn-round btn-sm text-white"
+          accion="eliminar"
+          data-id="<?=$barrio['bar_id']?>"
+          data-nombre="<?=$barrio['bar_nombre']?>"
+          data-comuna="<?=$barrio['com_nombre']?>"
+          data-url-post="<?=getUrl("Barrio","Barrio","postDelete",false,"ajax")?>">
+            Erradicar
+          </a>
         </td>
       </tr>
     <?php endwhile; ?>
   </tbody>
 
 </table>
-<!-- fin tabla comuna -->
-<!-- nav paginador -->
-
-<div class="float-right">
-  <nav aria-label="Page navigation example" class="bd-dark">
-    <ul class="pagination"  >
-      <li class="page-item">
-        <a class="page-link Previous" aria-label="Previous" valor="1"
-        url-data="<?=$urlPaginador?>"
-        tabla="<?=$tablaPaginador?>">
-          <span aria-hidden="true">&laquo;</span>
-        </a>
-      </li>
-      <?php $active=1 ?>
-      <?php for ($i=1;$i<=$total_paginas;$i++):?>
-        <li id='<?="item_".$i?>' class="page-item
-        <?php if ($i==$active) {echo "active";}?>">
-          <a class="page-link" url-data="<?=$urlPaginador?>" valor="<?=$i?>">
-            <?=$i?>
-          </a>
-        </li>
-      <?php endfor; ?>
-      <li>
-        <a aria-label="Next" class="page-link Next" total_paginas="<?=$total_paginas?>" valor="2"
-          url-data="<?=$urlPaginador?>"
-          tabla="<?=$tablaPaginador?>">
-          <span aria-hidden="true">&raquo;</span>
-        </a>
-      </li>
-    </ul>
-  </nav>
 </div>
-<!-- fin nav paginador -->
 
-<?php include_once '../views/Comuna/modal.php'?>
+<!-- fin tabla comuna -->
+
+<!-- jquery -->
+<script src="assets/js/core/jquery.3.2.1.min.js"></script>
+<!-- toastr -->
+<script src="http://codeseven.github.com/toastr/toastr.js"></script>
+<link href="http://codeseven.github.com/toastr/toastr.css" rel="stylesheet"/>
+<script src="js/modulos/barrio.js"></script>
+<!-- modal -->
+<?php include_once '../views/Barrio/modal.php'?>

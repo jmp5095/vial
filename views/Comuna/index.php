@@ -56,9 +56,13 @@
 
 </table>
 </div>
-
 <!-- fin tabla comuna -->
 
-<!-- paginacion -->
-
+<!-- jquery -->
+<script src="assets/js/core/jquery.3.2.1.min.js"></script>
+<!-- toastr -->
+<script src="http://codeseven.github.com/toastr/toastr.js"></script>
+<link href="http://codeseven.github.com/toastr/toastr.css" rel="stylesheet"/>
+<script src="js/modulos/comuna.js"></script>
+<!-- modal -->
 <?php include_once '../views/Comuna/modal.php'?>

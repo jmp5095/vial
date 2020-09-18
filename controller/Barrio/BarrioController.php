@@ -9,7 +9,11 @@ class BarrioController{
     $sql="SELECT * FROM comuna ORDER BY com_id";
     $comunas=$objeto->consult($sql);
 
-    include_once '../views/Barrio/create.php';
+    $arr=array();
+    while($row=pg_fetch_assoc($comunas)){
+      $arr[]=$row;
+    }
+    echo json_encode($arr);
 
   }
   function postCreate(){
@@ -20,7 +24,7 @@ class BarrioController{
       if ($_POST['id_comuna']=="") {
         $_SESSION['error']['comuna']="Ingrese una comuna por favor.";
       }
-      redirect(getUrl("Barrio","Barrio","getCreate"));
+      // redirect(getUrl("Barrio","Barrio","getCreate"));
     }else{
       $bar_nombre=$_POST['bar_nombre'];
       $com_id=$_POST['id_comuna'];
@@ -31,12 +35,14 @@ class BarrioController{
       $sql="INSERT INTO barrio VALUES($bar_id,'$bar_nombre',$com_id)";
       $resp=$objeto->insert($sql);
 
+      $arrResp=array();
       if ($resp) {
-        successMsg();
+        $arrResp['successMsg']="Registro exitoso";
       }else{
-        errorMsg();
+        $arrResp['errorMsg']="ocurrio un error";
       }
-      redirect(getUrl("Barrio","Barrio","index"));
+      echo json_encode($arrResp);
+
     }
   }
   public function getUpdate(){
@@ -60,19 +66,20 @@ class BarrioController{
 
     $bar_id=$_POST['bar_id'];
     $bar_nombre=$_POST['bar_nombre'];
-    $com_id=$_POST['com_id'];
+    $com_id=$_POST['id_comuna'];
 
 
     $sql="UPDATE barrio SET bar_nombre='$bar_nombre', id_comuna=$com_id WHERE bar_id=$bar_id";
 
     $resp=$objeto->update($sql);
 
+    $arrResp=array();
     if ($resp) {
-      successMsg();
-      redirect(getUrl("Barrio","Barrio","index"));
+      $arrResp['successMsg']="Actualizacion exitosa!";
     }else{
-      errorMsg();
+      $arrResp['errorMsg']="Ocurrio un error!";
     }
+    echo json_encode($arrResp);
 
   }
   public function getDelete(){
@@ -94,35 +101,22 @@ class BarrioController{
     $objeto=new BarrioModel();
     $resp=$objeto->delete($sql);
 
+    $arrResp=array();
     if ($resp) {
-      successMsg();
+      $arrResp['successMsg']="Eliminación exitosa!";
     }else{
-      errorMsg();
+      $arrResp['errorMsg']="Ocurrio un error!";
     }
-    redirect(getUrl("Barrio","Barrio","index"));
+    echo json_encode($arrResp);
   }
 
   function index(){
-    $cantidad=5;
-    if (isset($_GET['valor'])) {
-      $inicio=$_GET['valor'];
 
-      $inicio=($inicio*$cantidad)-$cantidad;
-    }else{
-      $inicio=0;
-    }
     $objeto= new BarrioModel();
-    $sql="SELECT b.bar_id, b.bar_nombre, c.com_id, c.com_nombre FROM barrio b,comuna c WHERE b.id_comuna=c.com_id ORDER BY bar_id LIMIT $cantidad offset $inicio";
-    $sql2="SELECT count(*) FROM barrio";
+    $sql="SELECT b.bar_id, b.bar_nombre, c.com_id, c.com_nombre FROM barrio b,comuna c WHERE b.id_comuna=c.com_id ORDER BY bar_id";
     $barrios=$objeto->consult($sql);
-    $cantbarrios=$objeto->consult($sql2);
-    $cantbarrios=pg_fetch_assoc($cantbarrios)['count'];
 
-    // variables paginador
-    $total_paginas=ceil($cantbarrios/$cantidad);
-    $urlPaginador=getUrl("Barrio","Barrio","paginador",false,"ajax");
-    $tablaPaginador="barrio";
-    $tablaId="bar_id";
+
 
     include_once '../views/Barrio/index.php';
   }
