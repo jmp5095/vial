@@ -209,7 +209,6 @@
   	</script>
     <!-- personal script -->
     <script src="js/global.js"></script>
-    <!-- <script src="js/modulos/barrio.js"></script> -->
 
 <!-- toastr -->
 <script src="http://codeseven.github.com/toastr/toastr.js"></script>

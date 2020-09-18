@@ -64,12 +64,15 @@
 </div>
 
 <!-- fin tabla comuna -->
+<!-- modal -->
+<?php include_once '../views/Barrio/modal.php'?>
+
 
 <!-- jquery -->
 <script src="assets/js/core/jquery.3.2.1.min.js"></script>
 <!-- toastr -->
 <script src="http://codeseven.github.com/toastr/toastr.js"></script>
 <link href="http://codeseven.github.com/toastr/toastr.css" rel="stylesheet"/>
+<!-- scrips principales -->
+<script src="js/modulos/global.js"></script>
 <script src="js/modulos/barrio.js"></script>
-<!-- modal -->
-<?php include_once '../views/Barrio/modal.php'?>

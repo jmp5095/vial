@@ -135,24 +135,9 @@
           <div class="collapse" id="submenu">
             <ul class="nav nav-collapse">
               <li>
-                <a data-toggle="collapse" href="#barrio">
-                  <span class="sub-item">Barrio</span>
-                  <span class="caret"></span>
-                </a>
-                <div class="collapse" id="barrio">
-                  <ul class="nav nav-collapse subnav">
-                    <li>
-                      <a href="<?=getUrl("Barrio","Barrio","getCreate") ?>">
-                        <span class="sub-item">Registrar barrio</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="<?=getUrl("Barrio","Barrio","index")?>">
-                        <span class="sub-item">Consultar barrio</span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
+                  <a href="<?=getUrl("Barrio","Barrio","index")?>">
+                    <span class="sub-item">Consultar barrio</span>
+                  </a>
               </li>
               <li>
                   <a href="<?=getUrl("Comuna","Comuna","index")?>">

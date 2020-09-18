@@ -1,75 +1,15 @@
 $(document).ready(function(){
   // EVITAR PEGAR TEXTO
-  $("#bar_nombre").on('paste', function(e){
-    e.preventDefault();
-    alert('Esta acción está prohibida');
-  });
-  // MENSAJES DE LAERTA
-  toastr.options = {
-    "closeButton": false,
-    "debug": false,
-    "newestOnTop": false,
-    "progressBar": false,
-    "positionClass": "toast-bottom-right",
-    "preventDuplicates": false,
-    "onclick": null,
-    "showDuration": "300",
-    "hideDuration": "1000",
-    "timeOut": "5000",
-    "extendedTimeOut": "1000",
-    "showEasing": "swing",
-    "hideEasing": "linear",
-    "showMethod": "fadeIn",
-    "hideMethod": "fadeOut"
-  }
-  // FUNCIONES
-  let prepararCampo=(id)=>{
-    $('#'+id).removeAttr('disabled');
-    $('#'+id).removeClass('is-valid');
-    $('#'+id).removeClass('is-invalid');
-    $('span.'+id).html('');
-  }
-  let prepararCampoSelect=(id)=>{
-    $('#'+id).removeAttr('disabled');
-    $('#'+id).removeClass('is-valid');
-    $('#'+id).removeClass('is-invalid');
-    $('span.'+id).html('');
-  }
-  let validarCampo=(id,campo)=>{
-    campo=campo.trim();
-    if ($('span.'+id).hasClass('caracter') | $('span.'+id).hasClass('vacio') | campo=="") {
-      $('#'+id).removeClass('is-valid');
-      $('#'+id).addClass('is-invalid');
-      if ($('span.'+id).hasClass('caracter')) {
-        $('span.'+id).html('No ingrese caracteres especiales')
-      }else{
-        $('span.'+id).html('El campo no puede estar vacio')
-      }
-      return false;
-    }else{
-      return true;
-    }
-  }
-  let validarCampoSelect=(id,valor_id)=>{
-    if (valor_id=="") {
-      $('#'+id).removeClass('is-valid');
-      $('#'+id).addClass('is-invalid');
-      $('span.'+id).html('Seleccione una opción');
-      return false
-    }else{
-      $('#'+id).addClass('is-valid');
-      $('#'+id).removeClass('is-invalid');
-      $('span.'+id).html('');
+  noPaste('bar_nombre');
+  //TOASTR PERSONALIZADO
+  let opc=myToastr();
+  toastr.options=opc;
 
-      return true;
-    }
-  }
 
   // MODAl, ESTO MUESTRA EL MODAL
   $(document).on("click","#accionarModal",function(){
     let accion=$(this).attr('accion');
     let url=$(this).attr('data-url');
-
     if(accion=="registrar"){
       $('#titulo').html('Registrar barrio');
       $('#bar_nombre').val('');
@@ -116,7 +56,7 @@ $(document).ready(function(){
             }else{
               selected="";
             }
-              html+=`<option value="${comunas[i].com_id}" ${selected}>${comunas[i].com_nombre}</option>`
+            html+=`<option value="${comunas[i].com_id}" ${selected}>${comunas[i].com_nombre}</option>`
           }
           $('#id_comuna').html(html);
         }
@@ -134,8 +74,8 @@ $(document).ready(function(){
       $('#bar_nombre').val(nombre);
       $('#com_nombre').html(comuna);
 
+      prepararCampo('bar_nombre');
       $('#bar_nombre').attr('disabled','true');
-      $('#id_comuna').attr('disabled','true');
     }
     // data del boton modal
     url = $(this).attr('data-url-post');
@@ -206,7 +146,7 @@ $(document).ready(function(){
             msg=msg['successMsg'];
             titleMsg="Todo en orden";
           }
-          $('#modal').modal('hide');
+
           if (accion=="registrar") {
             toastr[typeMsg](msg,titleMsg);
           }
@@ -217,6 +157,8 @@ $(document).ready(function(){
           if (accion=="eliminar") {
             toastr[typeMsg](msg,titleMsg);
           }
+
+          $('#modal').modal('hide');
         }
 
       });
@@ -229,35 +171,12 @@ $(document).ready(function(){
 
   });
   //FIN BOTON DEL MODAL
+
+
+
+
   // PAGINACION
-  let idioma={
-    "sProcessing":     "Procesando...",
-    "sLengthMenu":     "<strong class='font-weight-bold h4'>Registros por página<strong> _MENU_",
-    "sZeroRecords":    "No se encontraron resultados",
-    "sEmptyTable":     "Ningún dato disponible en esta tabla",
-    "sInfo":           "<span class='h4'>Registros del _START_ al _END_ </span> <br /> <b class='h1 font-weight-bold'>Total:</b> <span class='h4'> _TOTAL_ registros </span'>",
-    "sInfoEmpty":      "Registros del 0 al 0 de un total de 0 registros",
-    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-    "sInfoPostFix":    "",
-    "sSearch":         "<strong class='font-weight-bold h4'>Buscar:</strong>",
-    "sUrl":            "",
-    "sInfoThousands":  ",",
-    "sLoadingRecords": "Cargando...",
-    "oPaginate": {
-      "sFirst":    "Primero",
-      "sLast":     "Último",
-      "sNext":     ">>",
-      "sPrevious": "<<"
-    },
-    "oAria": {
-      "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-      "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-    },
-    "buttons": {
-      "copy": "Copiar",
-      "colvis": "Visibilidad"
-    }
-  }
+  let idioma=idiomaDataTable();
   let table = $('#myTable').DataTable({
     "language":idioma
   });
