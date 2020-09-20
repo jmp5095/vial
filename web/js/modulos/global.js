@@ -44,7 +44,7 @@ let validarCampoSelect=(id,valor_id)=>{
 let noPaste=(id)=>{
   $("#"+id).on('paste', function(e){
     e.preventDefault();
-    alert('Esta acción está prohibida');
+    toastr['warning']("Esta accion no esta permitida","Alerta!");
   });
 }
 

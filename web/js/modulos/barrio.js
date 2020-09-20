@@ -72,10 +72,12 @@ $(document).ready(function(){
       $('#titulo').html('Eliminar barrio id '+id);
       $('#bar_id').val(id);
       $('#bar_nombre').val(nombre);
-      $('#com_nombre').html(comuna);
+      $('#id_comuna').html('<option>'+comuna+'</>');
 
       prepararCampo('bar_nombre');
+      prepararCampoSelect('com_nombre');
       $('#bar_nombre').attr('disabled','true');
+      $('#id_comuna').attr('disabled','true');
     }
     // data del boton modal
     url = $(this).attr('data-url-post');

@@ -20,7 +20,7 @@
             <div class="form-group">
               <label for="id_comuna">Comuna</label>
               <select id="id_comuna" class="form-control" name="id_comuna" disabled="true">
-                <option id="com_nombre" value=""></option>
+
               </select>
               <span class="text-danger id_comuna" for="id_comuna"></span>
             </div>
