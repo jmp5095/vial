@@ -211,9 +211,8 @@
     <script src="js/global.js"></script>
 
 <!-- toastr -->
-<script src="http://codeseven.github.com/toastr/toastr.js"></script>
-<link href="http://codeseven.github.com/toastr/toastr.css" rel="stylesheet"/>
-
+<script src="js/toastr.js"></script>
+<link href="assets/css/toastr.css" rel="stylesheet"/>
 
 <script>
 $(document).ready(function() {

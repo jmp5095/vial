@@ -1,76 +1,69 @@
-<div class="jumbotron mt-3 py-0">
-  <h1 class="display-4 font-weight-bold text-center">Deteriorios</h1>
+<div class="jumbotron mt-3 py-0  col-sm-10 ml-5">
+  <h1 class="display-4 font-weight-bold text-center">Deterioro</h1>
 </div>
-<!-- filtro buscar -->
-<div class="row my-3 ">
-  <div class="ml-3">
-    <div class="mt-2 font-weight-bold">Buscar:</div>
+  <!-- Button trigger modal -->
+  <div class="col-sm-11">
+    <button type="button"
+      class="btn btn-success mr-2 float-right font-weight-bold"
+      id="accionarModal"
+      data-toggle="modal"
+      data-target="#modal"
+      accion="registrar"
+      data-url="<?=getUrl("Deterioro","Deterioro","postCreate",false,"ajax")?>">
+      Registrar
+    </button>
   </div>
-  <div class="col-sm-3">
-    <input id="buscar" class="form-control" type="text" name="buscar" placeholder="Buscar" value="">
-  </div>
-  <div class="col-sm-8">
-    <a class="btn btn-success float-right font-weight-bold" type="button"
-    href="<?=getUrl("Deterioro","Deterioro","getCreate") ?>" >Registrar</a>
-  </div>
-</div>
-<!-- fin filtro buscar -->
+<!-- fin modal -->
+<br><br><br>
 
-<!-- tabla Deterioro -->
-<table class="table table-striped table-hover">
+<!-- tabla comuna -->
+<div class="col-sm-11 ml-2">
+
+<table id="myTable" class="table table-striped table-hover">
   <thead class="thead-dark">
     <tr>
       <th class="text-center">ID</th>
       <th class="text-center">Nombre</th>
-      <th class="text-center">Descripcion</th>
-      <th class="text-center">Acciones</th>
+      <th class="text-center">Descripción</th>
+      <th class="text-center" style="width:135px">Acciones</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody id="myTBody">
     <?php while ($deterioro=pg_fetch_assoc($deterioros)): ?>
-      <tr>
+      <tr >
         <td class="text-center"><?=$deterioro['det_id']?></td>
         <td class="text-center"><?=$deterioro['det_nombre']?></td>
         <td class="text-center"><?=$deterioro['det_descripcion']?></td>
         <td class="text-center">
-          <a href="<?=getUrl("Deterioro","Deterioro","getUpdate",$deterioro) ?>" class="btn btn-success btn-round btn-sm" name="button">Editar</a>
-          <a href="<?=getUrl("Deterioro","Deterioro","getDelete",$deterioro) ?>" class="btn btn-danger btn-round btn-sm" name="button">Erradicar</a>
+          <a id="accionarModal" data-toggle="modal" data-target="#modal" class="btn btn-success btn-round btn-sm text-white"
+          accion="actualizar"
+          data-id="<?=$deterioro['det_id']?>"
+          data-nombre="<?=$deterioro['det_nombre']?>"
+          data-descripcion="<?=$deterioro['det_descripcion']?>"
+          data-url="<?=getUrl("Deterioro","Deterioro","postUpdate",false,"ajax")?>">
+            Editar
+          </a>
+          <a id="accionarModal" data-toggle="modal" data-target="#modal" class="btn btn-danger btn-round btn-sm text-white"
+          accion="eliminar"
+          data-id="<?=$deterioro['det_id']?>"
+          data-nombre="<?=$deterioro['det_nombre']?>"
+          data-descripcion="<?=$deterioro['det_descripcion']?>"
+          data-url="<?=getUrl("Deterioro","Deterioro","postDelete",false,"ajax")?>">
+            Erradicar
+          </a>
         </td>
       </tr>
     <?php endwhile; ?>
   </tbody>
 
 </table>
-<!-- fin tabla Deterioro -->
-<!-- nav paginador -->
-
-<div class="float-right">
-  <nav aria-label="Page navigation example" class="bd-dark">
-    <ul class="pagination"  >
-      <li class="page-item">
-        <a class="page-link Previous" aria-label="Previous" valor="1"
-        url-data="<?=$urlPaginador?>"
-        >
-          <span aria-hidden="true">&laquo;</span>
-        </a>
-      </li>
-      <?php $active=1 ?>
-      <?php for ($i=1;$i<=$total_paginas;$i++):?>
-        <li id='<?="item_".$i?>' class="page-item
-        <?php if ($i==$active) {echo "active";}?>">
-          <a class="page-link" url-data="<?=$urlPaginador?>" valor="<?=$i?>">
-            <?=$i?>
-          </a>
-        </li>
-      <?php endfor; ?>
-      <li>
-        <a aria-label="Next" class="page-link Next" total_paginas="<?=$total_paginas?>" valor="2"
-          url-data="<?=$urlPaginador?>"
-          >
-          <span aria-hidden="true">&raquo;</span>
-        </a>
-      </li>
-    </ul>
-  </nav>
 </div>
-<!-- fin nav paginador -->
+<!-- fin tabla comuna -->
+<!-- modal -->
+<?php include_once '../views/Deterioro/modal.php'?>
+
+<!-- jquery -->
+<script src="assets/js/core/jquery.3.2.1.min.js"></script>
+<!-- scrips principales -->
+<script src="../js/global.js"></script>
+<script src="../js/deterioro.js"></script>

@@ -1,10 +1,10 @@
 <div class="jumbotron mt-3 py-0  col-sm-10 ml-5">
   <h1 class="display-4 font-weight-bold text-center">Comunas</h1>
 </div>
-<!-- filtro buscar -->
   <!-- Button trigger modal -->
-  <div class="bg-dark ml-5">
-    <button type="button" class="btn btn-success float-left font-weight-bold"
+  <div class="col-sm-11">
+    <button type="button"
+      class="btn btn-success mr-2 float-right font-weight-bold"
       id="accionarModal"
       data-toggle="modal"
       data-target="#modal"
@@ -14,14 +14,12 @@
     </button>
   </div>
 <!-- fin modal -->
-<br>
-<br><br>
-<!-- fin filtro buscar -->
+<br><br><br>
 
 <!-- tabla comuna -->
 <div class="col-sm-11 ml-2">
 
-<table id="myTable" class="table table-striped table-hover ">
+<table id="myTable" class="table table-striped table-hover">
   <thead class="thead-dark">
     <tr>
       <th class="text-center">ID</th>
@@ -62,9 +60,7 @@
 
 <!-- jquery -->
 <script src="assets/js/core/jquery.3.2.1.min.js"></script>
-<!-- toastr -->
-<script src="http://codeseven.github.com/toastr/toastr.js"></script>
-<link href="http://codeseven.github.com/toastr/toastr.css" rel="stylesheet"/>
+
 <!-- scrips principales -->
-<script src="js/modulos/global.js"></script>
-<script src="js/modulos/comuna.js"></script>
+<script src="../js/global.js"></script>
+<script src="../js/comuna.js"></script>

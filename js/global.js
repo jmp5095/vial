@@ -97,3 +97,25 @@ let idiomaDataTable=()=>{
     }
   }
 }
+let getUrl=(modulo,controlador,funcion,parametro=false,pagina=false)=>{
+  if (!pagina) {
+    pagina="index";
+  }
+  let url=`${pagina}.php?modulo=${modulo}&controlador=${controlador}&funcion=${funcion}`;
+
+  if (parametro) {
+    parametro.forEach((item, i) => {
+      url+=`&${item.key}=${item.value}`;
+    });
+
+  }
+
+  return url;
+}
+
+let crearTabla=()=>{
+  let idioma=idiomaDataTable();
+  return $('#myTable').DataTable({
+    "language":idioma
+  });
+}

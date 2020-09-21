@@ -96,4 +96,7 @@ CREATE TABLE orden(
   FOREIGN KEY (id_caso) REFERENCES caso(cas_id),
   FOREIGN KEY (id_usuario) REFERENCES usuario(usu_id)
 );
-CREATE TABLE elemento_complementario();
+CREATE TABLE elemento_complementario(
+  ele_com_id serial primary key,
+  ele_com_descripcion varchar(50)
+);

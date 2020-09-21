@@ -19,6 +19,7 @@ $(document).ready(function(){
         url:url,
         success:function(resp){
           let comunas=JSON.parse(resp)
+          console.log(comunas)
           let html=`
           <option value="">Seleccione...</option>
           `
@@ -75,7 +76,7 @@ $(document).ready(function(){
       $('#id_comuna').html('<option>'+comuna+'</>');
 
       prepararCampo('bar_nombre');
-      prepararCampoSelect('com_nombre');
+      prepararCampoSelect('id_comuna');
       $('#bar_nombre').attr('disabled','true');
       $('#id_comuna').attr('disabled','true');
     }
@@ -138,6 +139,7 @@ $(document).ready(function(){
         success:function(resp){
           let typeMsg;
           let msg=JSON.parse(resp);
+          console.log(msg)
           let titleMsg;
           if (msg['errorMsg']) {
             typeMsg="error";
@@ -149,18 +151,53 @@ $(document).ready(function(){
             titleMsg="Todo en orden";
           }
 
-          if (accion=="registrar") {
-            toastr[typeMsg](msg,titleMsg);
-          }
-          if (accion=="actualizar") {
-            toastr[typeMsg](msg,titleMsg);
-
-          }
-          if (accion=="eliminar") {
-            toastr[typeMsg](msg,titleMsg);
-          }
+          toastr[typeMsg](msg,titleMsg);
 
           $('#modal').modal('hide');
+          url=getUrl("Barrio","Barrio","consultar",false,"ajax");
+          $.ajax({
+            type:"POST",
+            url:url,
+            success:function(resp){
+              if (!resp['errorMsg']) {
+                  json=JSON.parse(resp)
+                  entornos=json['barrios']
+                  console.log(entornos)
+                  let html=``;
+                  entornos.forEach((item, i) => {
+                    html+=`
+                    <tr >
+                      <td class="text-center">${item.bar_id}</td>
+                      <td class="text-center">${item.bar_nombre}</td>
+                      <td class="text-center">${item.com_nombre}</td>
+                      <td class="text-center">
+                        <a id="accionarModal" data-toggle="modal" data-target="#modal" class="btn btn-success btn-round btn-sm text-white"
+                        accion="actualizar"
+                        data-id="${item.bar_id}"
+                        data-nombre="${item.bar_nombre}"
+                        data-id-comuna="${item.com_id}"
+                        data-url="${getUrl("Barrio","Barrio","getCreate",false,"ajax")}"
+                        data-url-post="${getUrl("Barrio","Barrio","postUpdate",false,"ajax")}">
+                          Editar
+                        </a>
+                        <a id="accionarModal" data-toggle="modal" data-target="#modal" class="btn btn-danger btn-round btn-sm text-white"
+                        accion="eliminar"
+                        data-id="${item.bar_id}"
+                        data-nombre="${item.bar_nombre}"
+                        data-comuna="${item.com_nombre}"
+                        data-url-post="${getUrl("Barrio","Barrio","postDelete",false,"ajax")}">
+                          Erradicar
+                        </a>
+                      </td>
+                    </tr>
+                    `;
+                  });
+                  table.destroy();
+                  $('#myTable > tbody').html(html);
+                  table = crearTabla();
+              }
+            }
+          });//fin ajax
         }
 
       });

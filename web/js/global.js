@@ -96,58 +96,58 @@ $(document).ready(function(){
     // });
   });
 // FIN VALIDAR CAMPOS
-// PAGINACION
-  $(document).on("click",".page-link",function(){
-    let url=$(this).attr('url-data');
-
-    let n_pagina=$(this).attr('valor');
-    let label=$(this).attr('aria-label');
-    console.log(n_pagina)
-
-    let total_paginas=$(this).attr('total_paginas');
-
-    let aux=false;
-    let vaNext=parseInt($('.Next').attr('valor'));
-    let vaPrev=parseInt($('.Previous').attr('valor'));
-    if (label=="Previous" && n_pagina != 1) {
-      vaNext--;
-      vaPrev--;
-      $('.Next').attr('valor',vaNext);
-      $('.Previous').attr('valor',vaPrev);
-      n_pagina--
-      $('#item_'+(n_pagina+1)).removeClass('active');
-      aux=true;
-    }else if (label=="Next" && n_pagina <= total_paginas){
-      vaNext++;
-      vaPrev++;
-      $('.Next').attr('valor',vaNext);
-      $('.Previous').attr('valor',vaPrev);
-      $('#item_'+(n_pagina-1)).removeClass('active');
-      aux=true;
-    }
-    if (aux) {
-      $('#item_'+n_pagina).addClass('active');
-      $.ajax({
-        url:url,
-        data:{
-          valor:n_pagina,
-        },
-        type:"POST",
-        success:function(datos){
-          $("tbody").html(datos);
-        }
-      });
-
-    }
-
-  })
-// FIN PAGINACION
+// // PAGINACION
+//   $(document).on("click",".page-link",function(){
+//     let url=$(this).attr('url-data');
+//
+//     let n_pagina=$(this).attr('valor');
+//     let label=$(this).attr('aria-label');
+//     console.log(n_pagina)
+//
+//     let total_paginas=$(this).attr('total_paginas');
+//
+//     let aux=false;
+//     let vaNext=parseInt($('.Next').attr('valor'));
+//     let vaPrev=parseInt($('.Previous').attr('valor'));
+//     if (label=="Previous" && n_pagina != 1) {
+//       vaNext--;
+//       vaPrev--;
+//       $('.Next').attr('valor',vaNext);
+//       $('.Previous').attr('valor',vaPrev);
+//       n_pagina--
+//       $('#item_'+(n_pagina+1)).removeClass('active');
+//       aux=true;
+//     }else if (label=="Next" && n_pagina <= total_paginas){
+//       vaNext++;
+//       vaPrev++;
+//       $('.Next').attr('valor',vaNext);
+//       $('.Previous').attr('valor',vaPrev);
+//       $('#item_'+(n_pagina-1)).removeClass('active');
+//       aux=true;
+//     }
+//     if (aux) {
+//       $('#item_'+n_pagina).addClass('active');
+//       $.ajax({
+//         url:url,
+//         data:{
+//           valor:n_pagina,
+//         },
+//         type:"POST",
+//         success:function(datos){
+//           $("tbody").html(datos);
+//         }
+//       });
+//
+//     }
+//
+//   })
+// // FIN PAGINACION
 
 // SIDEBAR
-$(document).on("click","#miside",function(){
-  let item=$(this).attr('id');
-  console.log(item);
-});
+// $(document).on("click","#miside",function(){
+//   let item=$(this).attr('id');
+//   console.log(item);
+// });
 // FIN SIDEBAR
 
 

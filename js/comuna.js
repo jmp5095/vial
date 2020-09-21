@@ -39,7 +39,6 @@ $(document).ready(function(){
     // data del boton modal
     $('#btnModal').attr('accion',accion);
     $('#btnModal').attr('data-url',url);
-    $('#btnModal').attr('data-dismiss','');
   });
   // FIN MODAL ESTO MUESTRA EL MODAL
   // BOTON DEL MODAL

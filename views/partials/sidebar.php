@@ -51,7 +51,6 @@
                   <span class="sub-item">Consultar caso</span>
                 </a>
               </li>
-
             </ul>
           </div>
         </li>
@@ -134,117 +133,41 @@
           </a>
           <div class="collapse" id="submenu">
             <ul class="nav nav-collapse">
-              <li>
-                  <a href="<?=getUrl("Barrio","Barrio","index")?>">
-                    <span class="sub-item">Consultar barrio</span>
-                  </a>
-              </li>
-              <li>
-                  <a href="<?=getUrl("Comuna","Comuna","index")?>">
-                    <span class="sub-item">Consultar comuna</span>
-                  </a>
-              </li>
-              <li>
-                <a data-toggle="collapse" href="#deterioro">
-                  <span class="sub-item">Deterioro</span>
-                  <span class="caret"></span>
-                </a>
-                <div class="collapse" id="deterioro">
-                  <ul class="nav nav-collapse subnav">
-                    <li>
-                      <a href="<?=getUrl("Deterioro","Deterioro","getCreate")?>">
-                        <span class="sub-item">Registrar deterioro</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="<?=getUrl("Deterioro","Deterioro","index")?>">
-                        <span class="sub-item">Consultar deterioro</span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-              <li>
-                <a data-toggle="collapse" href="#elementoComplementario">
-                  <span class="sub-item">Elemento complementario</span>
-                  <span class="caret"></span>
-                </a>
-                <div class="collapse" id="elementoComplementario">
-                  <ul class="nav nav-collapse subnav">
-                    <li>
-                      <a href="#">
-                        <span class="sub-item">Registrar elemento</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <span class="sub-item">Consultar elemento</span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-              <li>
-                <a data-toggle="collapse" href="#entorno">
-                  <span class="sub-item">Entorno</span>
-                  <span class="caret"></span>
-                </a>
-                <div class="collapse" id="entorno">
-                  <ul class="nav nav-collapse subnav">
-                    <li>
-                      <a href="#">
-                        <span class="sub-item">Registrar entorno</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <span class="sub-item">Consurolltar entorno</span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-              <li>
-                <a data-toggle="collapse" href="#rol">
-                  <span class="sub-item">Rol</span>
-                  <span class="caret"></span>
-                </a>
-                <div class="collapse" id="rol">
-                  <ul class="nav nav-collapse subnav">
-                    <li>
-                      <a href="#">
-                        <span class="sub-item">Registrar rol</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <span class="sub-item">Consultar rol</span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-              <li>
-                <a data-toggle="collapse" href="#tipo_pavimento">
-                  <span class="sub-item">Pavimentos</span>
-                  <span class="caret"></span>
-                </a>
-                <div class="collapse" id="tipo_pavimento">
-                  <ul class="nav nav-collapse subnav">
-                    <li>
-                      <a href="<?=getUrl("TipoPavimento","TipoPavimento","getCreate") ?>">
-                        <span class="sub-item">Registrar pavimento</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="<?=getUrl("TipoPavimento","TipoPavimento","index") ?>">
-                        <span class="sub-item">Consultar pavimento</span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
 
+              <li>
+                <a href="<?=getUrl("Barrio","Barrio","index")?>">
+                  <span class="sub-item">Consultar barrio</span>
+                </a>
+              </li>
+              <li>
+                <a href="<?=getUrl("Comuna","Comuna","index")?>">
+                  <span class="sub-item">Consultar comuna</span>
+                </a>
+              </li>
+              <li>
+                <a href="<?=getUrl("Deterioro","Deterioro","index")?>">
+                  <span class="sub-item">Consultar deterioro</span>
+                </a>
+              </li>
+              <li>
+                <a href="<?=getUrl("Elemento","Elemento","index") ?>">
+                  <span class="sub-item">Consultar elemento complementario</span>
+                </a>
+              <li>
+                <a href="<?=getUrl("Entorno","Entorno","index")?>">
+                  <span class="sub-item">Consultar entorno</span>
+                </a>
+              </li>
+              <li>
+                <a href="<?=getUrl("Rol","Rol","index")?>">
+                  <span class="sub-item">Consultar rol</span>
+                </a>
+              </li>
+              <li>
+                <a href="<?=getUrl("TipoPavimento","TipoPavimento","index") ?>">
+                  <span class="sub-item">Consultar pavimento</span>
+                </a>
+              </li>
 
             </ul>
           </div>
