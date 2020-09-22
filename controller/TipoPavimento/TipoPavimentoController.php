@@ -8,7 +8,7 @@ class TipoPavimentoController{
   }
   function postCreate(){
     $tip_pav_nombre=$_POST['tip_pav_nombre'];
-    
+
 
     $objeto=new TipoPavimentoModel();
     $tip_pav_id=$objeto->autoincrement("tipo_pavimento","tip_pav_id");
@@ -27,13 +27,13 @@ class TipoPavimentoController{
   function getUpdate(){
     $tip_pav_id=$_GET['tip_pav_id'];
     $tip_pav_nombre=$_GET['tip_pav_nombre'];
-   
+
     include_once '../views/TipoPavimento/update.php';
   }
   function postUpdate(){
       $tip_pav_id=$_POST['tip_pav_id'];
       $tip_pav_nombre=$_POST['tip_pav_nombre'];
-     
+
 
       $objeto=new TipoPavimentoModel();
       $sql="UPDATE tipo_pavimento SET tip_pav_nombre='$tip_pav_nombre' WHERE tip_pav_id=$tip_pav_id";
@@ -73,6 +73,23 @@ class TipoPavimentoController{
     $tipos=$objeto->consult($sql);
 
     include_once '../views/TipoPavimento/index.php';
+  }
+  function consultar(){
+    $objeto= new TipoPavimentoModel();
+    $sql= "SELECT * FROM tipo_pavimento ORDER BY tip_pav_id ";
+    $pavimentos=$objeto->consult($sql);
+
+    $arrPavimentos=array();
+    while ($row=pg_fetch_assoc($pavimentos)) {
+    array_push($arrPavimentos,$row);
+    }
+    $arrResp=array();
+    if ($pavimentos) {
+      $arrResp['tipoPavimentos']=$arrPavimentos;
+    }else{
+      $arrResp['errorMsg']="Ocurrio un error!";
+    }
+    echo json_encode($arrResp);
   }
 
 }

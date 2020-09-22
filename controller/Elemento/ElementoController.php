@@ -74,6 +74,23 @@ class ElementoController{
 
     include_once '../views/Elemento/index.php';
   }
+  function consultar(){
+    $objeto=new ElementoModel();
+    $sql="SELECT * FROM elemento_complementario ORDER BY ele_com_id";
+    $elementos=$objeto->consult($sql);
+
+    $arrElementos=array();
+    while ($row=pg_fetch_assoc($elementos)) {
+    array_push($arrElementos,$row);
+    }
+    $arrResp=array();
+    if ($elementos) {
+      $arrResp['elementos']=$arrElementos;
+    }else{
+      $arrResp['errorMsg']="Ocurrio un error!";
+    }
+    echo json_encode($arrResp);
+  }
 
 }
 

@@ -48,15 +48,15 @@ $(document).ready(function(){
       $('#det_descripcion').attr('disabled','true');
     }
     // data del boton modal
+    url=$(this).attr('data-url-post');
     $('#btnModal').attr('accion',accion);
-    $('#btnModal').attr('data-url',url);
-    $('#btnModal').attr('data-dismiss','');
+    $('#btnModal').attr('data-url-post',url);
   });
   // FIN MODAL ESTO MUESTRA EL MODAL
   // BOTON DEL MODAL
   $(document).on("click","#btnModal",function(){
     let accion=$(this).attr('accion');
-    let url=$(this).attr('data-url');
+    let url=$(this).attr('data-url-post');
     let auxValido= false;
     if (accion=="registrar") {
       //validamos que no este vacio
@@ -124,6 +124,52 @@ $(document).ready(function(){
           }
 
           $('#modal').modal('hide');
+          url=getUrl("Deterioro","Deterioro","consultar",false,"ajax");
+          $.ajax({
+            type:"POST",
+            url:url,
+            success:function(resp){
+              if (!resp['errorMsg']) {
+                  json=JSON.parse(resp)
+                  deterioro=json['deterioros']
+                  console.log(deterioro)
+                  let html=``;
+                  deterioro.forEach((item, i) => {
+                    html+=`
+                    <tr >
+                      <td class="text-center">${item.det_id}</td>
+                      <td class="text-center">${item.det_nombre}</td>
+                      <td class="text-center">${item.det_descripcion}</td>
+
+                      <td class="text-center">
+                        <a id="accionarModal" data-toggle="modal" data-target="#modal" class="btn btn-success btn-round btn-sm text-white"
+                        accion="actualizar"
+                        data-id="${item.det_id}"
+                        data-nombre="${item.det_nombre}"
+                        data-descripcion="${item.det_descripcion}"
+
+                        data-url-post="${getUrl("Deterioro","Deterioro","postUpdate",false,"ajax")}">
+                          Editar
+                        </a>
+                        <a id="accionarModal" data-toggle="modal" data-target="#modal" class="btn btn-danger btn-round btn-sm text-white"
+                        accion="eliminar"
+                        data-id="${item.det_id}"
+                        data-nombre="${item.det_nombre}"
+                        data-nombre="${item.det_descripcion}"
+
+                        data-url-post="${getUrl("Deterioro","Deterioro","postDelete",false,"ajax")}">
+                          Erradicar
+                        </a>
+                      </td>
+                    </tr>
+                    `;
+                  });
+                  table.destroy();
+                  $('#myTable > tbody').html(html);
+                  table = crearTabla();
+              }
+            }
+          });//fin ajax
         }
 
       });
@@ -134,11 +180,8 @@ $(document).ready(function(){
   //FIN BOTON DEL MODAL
 
   // PAGINACION
-  let idioma=idiomaDataTable();
-  let table = $('#myTable').DataTable({
-    "language":idioma
-  });
-
+  let table = crearTabla();
+  
   $(document).on('click','#myTableBtn', (arguments) => {
 
   })

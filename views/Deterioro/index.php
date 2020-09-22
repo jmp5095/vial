@@ -9,7 +9,8 @@
       data-toggle="modal"
       data-target="#modal"
       accion="registrar"
-      data-url="<?=getUrl("Deterioro","Deterioro","postCreate",false,"ajax")?>">
+      data-url="<?=getUrl("Deterioro","Deterioro","getCreate",false,"ajax")?>"
+      data-url-post="<?=getUrl("Deterioro","Deterioro","postCreate",false,"ajax")?>">
       Registrar
     </button>
   </div>
@@ -40,7 +41,8 @@
           data-id="<?=$deterioro['det_id']?>"
           data-nombre="<?=$deterioro['det_nombre']?>"
           data-descripcion="<?=$deterioro['det_descripcion']?>"
-          data-url="<?=getUrl("Deterioro","Deterioro","postUpdate",false,"ajax")?>">
+          data-url="<?=getUrl("Deterioro","Deterioro","getUpdate",false,"ajax")?>"
+          data-url-post="<?=getUrl("Deterioro","Deterioro","postUpdate",false,"ajax")?>">
             Editar
           </a>
           <a id="accionarModal" data-toggle="modal" data-target="#modal" class="btn btn-danger btn-round btn-sm text-white"
@@ -48,7 +50,8 @@
           data-id="<?=$deterioro['det_id']?>"
           data-nombre="<?=$deterioro['det_nombre']?>"
           data-descripcion="<?=$deterioro['det_descripcion']?>"
-          data-url="<?=getUrl("Deterioro","Deterioro","postDelete",false,"ajax")?>">
+          data-url="<?=getUrl("Deterioro","Deterioro","getDelete",false,"ajax")?>"
+          data-url-post="<?=getUrl("Deterioro","Deterioro","postDelete",false,"ajax")?>">
             Erradicar
           </a>
         </td>

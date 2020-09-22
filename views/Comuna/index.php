@@ -9,7 +9,8 @@
       data-toggle="modal"
       data-target="#modal"
       accion="registrar"
-      data-url="<?=getUrl("Comuna","Comuna","postCreate",false,"ajax")?>">
+      data-url="<?=getUrl("Comuna","Comuna","getCreate",false,"ajax")?>"
+      data-url-post="<?=getUrl("Comuna","Comuna","postCreate",false,"ajax")?>">
       Registrar
     </button>
   </div>
@@ -37,14 +38,16 @@
           accion="actualizar"
           data-id="<?=$comuna['com_id']?>"
           data-nombre="<?=$comuna['com_nombre']?>"
-          data-url="<?=getUrl("Comuna","Comuna","postUpdate",false,"ajax")?>">
+          data-url="<?=getUrl("Comuna","Comuna","getUpdate",false,"ajax")?>"
+          data-url-post="<?=getUrl("Comuna","Comuna","postUpdate",false,"ajax")?>">
             Editar
           </a>
           <a id="accionarModal" data-toggle="modal" data-target="#modal" class="btn btn-danger btn-round btn-sm text-white"
           accion="eliminar"
           data-id="<?=$comuna['com_id']?>"
           data-nombre="<?=$comuna['com_nombre']?>"
-          data-url="<?=getUrl("Comuna","Comuna","postDelete",false,"ajax")?>">
+          data-url="<?=getUrl("Comuna","Comuna","getDelete",false,"ajax")?>"
+          data-url-post="<?=getUrl("Comuna","Comuna","postDelete",false,"ajax")?>">
             Erradicar
           </a>
         </td>

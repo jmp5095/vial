@@ -74,6 +74,23 @@ class DeterioroController{
 
     include_once '../views/Deterioro/index.php';
   }
+  function consultar(){
+    $objeto=new DeterioroModel();
+    $sql="SELECT * FROM deterioro ORDER BY det_id";
+    $deterioros=$objeto->consult($sql);
+
+    $arrDeterioros=array();
+    while ($row=pg_fetch_assoc($deterioros)) {
+    array_push($arrDeterioros,$row);
+    }
+    $arrResp=array();
+    if ($deterioros) {
+      $arrResp['deterioros']=$arrDeterioros;
+    }else{
+      $arrResp['errorMsg']="Ocurrio un error!";
+    }
+    echo json_encode($arrResp);
+  }
 
 }
 

@@ -9,7 +9,8 @@
       data-toggle="modal"
       data-target="#modal"
       accion="registrar"
-      data-url="<?=getUrl("TipoPavimento","TipoPavimento","postCreate",false,"ajax")?>">
+      data-url="<?=getUrl("TipoPavimento","TipoPavimento","getCreate",false,"ajax")?>"
+      data-url-post="<?=getUrl("TipoPavimento","TipoPavimento","postCreate",false,"ajax")?>">
       Registrar
     </button>
   </div>
@@ -40,7 +41,7 @@
           data-id="<?=$tipo['tip_pav_id']?>"
           data-nombre="<?=$tipo['tip_pav_nombre']?>"
 
-          data-url="<?=getUrl("TipoPavimento","TipoPavimento","postUpdate",false,"ajax")?>">
+          data-url-post="<?=getUrl("TipoPavimento","TipoPavimento","postUpdate",false,"ajax")?>">
             Editar
           </a>
           <a id="accionarModal" data-toggle="modal" data-target="#modal" class="btn btn-danger btn-round btn-sm text-white"
@@ -48,7 +49,7 @@
           data-id="<?=$tipo['tip_pav_id']?>"
           data-nombre="<?=$tipo['tip_pav_nombre']?>"
 
-          data-url="<?=getUrl("TipoPavimento","TipoPavimento","postDelete",false,"ajax")?>">
+          data-url-post="<?=getUrl("TipoPavimento","TipoPavimento","postDelete",false,"ajax")?>">
             Erradicar
           </a>
         </td>
@@ -64,9 +65,6 @@
 
 <!-- jquery -->
 <script src="assets/js/core/jquery.3.2.1.min.js"></script>
-<!-- toastr -->
-<script src="http://codeseven.github.com/toastr/toastr.js"></script>
-<link href="http://codeseven.github.com/toastr/toastr.css" rel="stylesheet"/>
 <!-- scrips principales -->
-<script src="..js/global.js"></script>
+<script src="../js/global.js"></script>
 <script src="../js/tipoPavimento.js"></script>

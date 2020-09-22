@@ -9,7 +9,8 @@
       data-toggle="modal"
       data-target="#modal"
       accion="registrar"
-      data-url="<?=getUrl("Elemento","Elemento","postCreate",false,"ajax")?>">
+      data-url="<?=getUrl("Elemento","Elemento","getCreate",false,"ajax")?>"
+      data-url-post="<?=getUrl("Elemento","Elemento","postCreate",false,"ajax")?>">
       Registrar
     </button>
   </div>
@@ -40,7 +41,7 @@
           data-id="<?=$elem['ele_com_id']?>"
           data-descripcion="<?=$elem['ele_com_descripcion']?>"
 
-          data-url="<?=getUrl("Elemento","Elemento","postUpdate",false,"ajax")?>">
+          data-url-post="<?=getUrl("Elemento","Elemento","postUpdate",false,"ajax")?>">
             Editar
           </a>
           <a id="accionarModal" data-toggle="modal" data-target="#modal" class="btn btn-danger btn-round btn-sm text-white"
@@ -48,7 +49,7 @@
           data-id="<?=$elem['ele_com_id']?>"
           data-descripcion="<?=$elem['ele_com_descripcion']?>"
 
-          data-url="<?=getUrl("Elemento","Elemento","postDelete",false,"ajax")?>">
+          data-url-post="<?=getUrl("Elemento","Elemento","postDelete",false,"ajax")?>">
             Erradicar
           </a>
         </td>

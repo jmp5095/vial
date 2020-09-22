@@ -123,7 +123,6 @@ $(document).ready(function(){
                 if (!resp['errorMsg']) {
                     json=JSON.parse(resp)
                     entornos=json['entornos']
-                    console.log(entornos)
                     let html=``;
                     entornos.forEach((item, i) => {
                       html+=`

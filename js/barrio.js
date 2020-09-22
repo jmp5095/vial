@@ -19,7 +19,6 @@ $(document).ready(function(){
         url:url,
         success:function(resp){
           let comunas=JSON.parse(resp)
-          console.log(comunas)
           let html=`
           <option value="">Seleccione...</option>
           `
@@ -161,10 +160,9 @@ $(document).ready(function(){
             success:function(resp){
               if (!resp['errorMsg']) {
                   json=JSON.parse(resp)
-                  entornos=json['barrios']
-                  console.log(entornos)
+                  barrios=json['barrios']
                   let html=``;
-                  entornos.forEach((item, i) => {
+                  barrios.forEach((item, i) => {
                     html+=`
                     <tr >
                       <td class="text-center">${item.bar_id}</td>
@@ -201,13 +199,7 @@ $(document).ready(function(){
         }
 
       });
-
-
-
-
     }
-
-
   });
   //FIN BOTON DEL MODAL
 
@@ -215,10 +207,8 @@ $(document).ready(function(){
 
 
   // PAGINACION
-  let idioma=idiomaDataTable();
-  let table = $('#myTable').DataTable({
-    "language":idioma
-  });
+  // PAGINACION
+  let table = crearTabla();
 
   $(document).on('click','#myTableBtn', (arguments) => {
 

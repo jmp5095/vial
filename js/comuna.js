@@ -37,14 +37,15 @@ $(document).ready(function(){
       $('#com_nombre').attr('disabled','true');
     }
     // data del boton modal
+    url=$(this).attr('data-url-post');
     $('#btnModal').attr('accion',accion);
-    $('#btnModal').attr('data-url',url);
+    $('#btnModal').attr('data-url-post',url);
   });
   // FIN MODAL ESTO MUESTRA EL MODAL
   // BOTON DEL MODAL
   $(document).on("click","#btnModal",function(){
     let accion=$(this).attr('accion');
-    let url=$(this).attr('data-url');
+    let url=$(this).attr('data-url-post');
     let auxValido= false;
     if (accion=="registrar") {
       //validamos que no este vacio
@@ -83,23 +84,70 @@ $(document).ready(function(){
         url:url,
         data:datos,
         success:function(resp){
-          $('tbody').html(resp);
+          let typeMsg;
+          let msg=JSON.parse(resp);
+          console.log(msg)
+          let titleMsg;
+          if (msg['errorMsg']) {
+            typeMsg="error";
+            msg=msg['errorMsg'];
+            titleMsg="Algo salio mal";
+          }else{
+            typeMsg="success";
+            msg=msg['successMsg'];
+            titleMsg="Todo en orden";
+          }
 
+          toastr[typeMsg](msg,titleMsg);
+          $('#modal').modal('hide');
+          url=getUrl("Comuna","Comuna","consultar",false,"ajax");
+          $.ajax({
+            type:"POST",
+            url:url,
+            success:function(resp){
+              if (!resp['errorMsg']) {
+                  json=JSON.parse(resp)
+                  comunas=json['comunas']
+                  console.log(comunas)
+                  let html=``;
+                  comunas.forEach((item, i) => {
+                    html+=`
+                    <tr >
+                      <td class="text-center">${item.com_id}</td>
+                      <td class="text-center">${item.com_nombre}</td>
+
+                      <td class="text-center">
+                        <a id="accionarModal" data-toggle="modal" data-target="#modal" class="btn btn-success btn-round btn-sm text-white"
+                        accion="actualizar"
+                        data-id="${item.com_id}"
+                        data-nombre="${item.com_nombre}"
+
+                        data-url-post="${getUrl("Comuna","Comuna","postUpdate",false,"ajax")}">
+                          Editar
+                        </a>
+                        <a id="accionarModal" data-toggle="modal" data-target="#modal" class="btn btn-danger btn-round btn-sm text-white"
+                        accion="eliminar"
+                        data-id="${item.com_id}"
+                        data-nombre="${item.com_nombre}"
+
+                        data-url-post="${getUrl("Comuna","Comuna","postDelete",false,"ajax")}">
+                          Erradicar
+                        </a>
+                      </td>
+                    </tr>
+                    `;
+                  });
+                  table.destroy();
+                  $('#myTable > tbody').html(html);
+                  table = crearTabla();
+              }
+            }
+          });//fin ajax
         }
 
       });
 
-      $('#modal').modal('hide');
-      if (accion=="registrar") {
-        toastr["success"]("Registro exitoso!","todo en orden");
-      }
-      if (accion=="actualizar") {
-        toastr["success"]("Actualizacion exitosa!","todo en orden");
 
-      }
-      if (accion=="eliminar") {
-        toastr["success"]("Eliminacion exitosa!","todo en orden");
-      }
 
 
     }
@@ -109,10 +157,7 @@ $(document).ready(function(){
   //FIN BOTON DEL MODAL
 
   // PAGINACION
-  let idioma=idiomaDataTable();
-  let table = $('#myTable').DataTable({
-    "language":idioma
-  });
+  let table = crearTabla();
 
   $(document).on('click','#myTableBtn', (arguments) => {
 
