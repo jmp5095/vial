@@ -77,25 +77,10 @@
           </div>
         </li>
         <li class="nav-item">
-          <a data-toggle="collapse" href="#forms">
+          <a href="<?=getUrl("Tramo","Tramo","index")?>">
             <i class="fas fa-directions"></i>
             <p>Tramo</p>
-            <span class="caret"></span>
           </a>
-          <div class="collapse" id="forms">
-            <ul class="nav nav-collapse">
-              <li>
-                <a href="forms/forms.html">
-                  <span class="sub-item">Registrar tramo</span>
-                </a>
-              </li>
-              <li>
-                <a href="forms/forms.html">
-                  <span class="sub-item">Consultar tramo</span>
-                </a>
-              </li>
-            </ul>
-          </div>
         </li>
         <li class="nav-item">
           <a data-toggle="collapse" href="#tables">
